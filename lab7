@@ -1,0 +1,77 @@
+#include<GL/glu.h>
+#include<GL/glut.h>
+
+GLfloat T=0;
+
+void spin()
+{
+    T += 0.005;
+    if(T>360)
+        T=0;
+    glutPostRedisplay();
+}
+
+void tri(GLfloat v[][3])
+{
+    glColor3f(1,0,0);
+    glBegin(GL_POLYGON);
+        glVertex3fv(v[0]);
+        glVertex3fv(v[1]);
+        glVertex3fv(v[2]);
+    glEnd();
+
+    glColor3f(0,1,0);
+    glBegin(GL_POLYGON);
+        glVertex3fv(v[0]);
+        glVertex3fv(v[1]);
+        glVertex3fv(v[3]);
+    glEnd();
+
+    glColor3f(0,0,1);
+    glBegin(GL_POLYGON);
+        glVertex3fv(v[1]);
+        glVertex3fv(v[2]);
+        glVertex3fv(v[3]);
+    glEnd();
+
+    glColor3f(0,1,1);
+    glBegin(GL_POLYGON);
+        glVertex3fv(v[0]);
+        glVertex3fv(v[2]);
+        glVertex3fv(v[3]);
+    glEnd();
+
+}
+
+void Draw()
+{
+    glClearColor(1,1,1,1);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    GLfloat v[4][3]=    {
+                            {-0.5,-0.5,-0.5},
+                            { 0.5,-0.5,-0.5},
+                            { 0.0, 0.5,-0.5},
+                            { 0.0, 0.0, 0.5}
+                        };
+    glRotatef(T,1,0,0);
+    tri(v);
+    glutSwapBuffers();
+
+}
+
+int main(int c, char **v)
+{
+    glutInit(&c,v);
+    glutInitWindowPosition(500,50);
+    glutInitWindowSize(500,500);
+    glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
+
+    glutCreateWindow("LAB7: Prajwal Y P");
+    glutDisplayFunc(Draw);
+    glutIdleFunc(spin);
+
+    glEnable(GL_DEPTH_TEST);
+    glutMainLoop();
+    return 0;
+}
