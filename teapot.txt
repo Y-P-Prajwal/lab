@@ -13,9 +13,11 @@ void spin()
 
 void Draw()
 {
-    GLfloat D[]= {1,0,0,1};
-    GLfloat DP[]= {1,1,0,1};
+    GLfloat D[]= {1,1,1,1};
     GLfloat P[]= {-1,1,0,0};
+    GLfloat M1[]={1,0,0,1};
+    GLfloat M2[]={1,1,0,1};
+
     glClearColor(1,1,1,1);
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
@@ -27,42 +29,47 @@ void Draw()
     //amibient,specular
     //glColor3f(1,0,0);
 
-    glPushMatrix();
-    glScalef(1,0.2,1);
-    glTranslatef(0,1.2,0);
-    glutSolidCube(1);
-    glPopMatrix();
+    glPushAttrib(GL_ALL_ATTRIB_BITS);
+        glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE,M2);
+        glPushMatrix();
+            glTranslatef(0,0.48,0);
+            glutSolidTeapot(0.2);
+        glPopMatrix();
 
-    glPushMatrix();
-    glLightfv(GL_LIGHT0,GL_DIFFUSE,DP);
-    glTranslatef(0,0.48,0);
-    glutSolidTeapot(0.2);
-    glPopMatrix();
 
-    glPushMatrix();
-    glScalef(0.1,1,0.1);
-    glTranslatef(-4.3,-.25,-4.3);
-    glutSolidCube(1);
-    glPopMatrix();
+        glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE,M1);
+        glPushMatrix();
+            glScalef(1,0.2,1);
+            glTranslatef(0,1.2,0);
+            glutSolidCube(1);
+        glPopMatrix();
 
-    glPushMatrix();
-    glScalef(0.1,1,0.1);
-    glTranslatef(4.3,-.25,4.3);
-    glutSolidCube(1);
-    glPopMatrix();
 
-    glPushMatrix();
-    glScalef(0.1,1,0.1);
-    glTranslatef(4.3,-.25,-4.3);
-    glutSolidCube(1);
-    glPopMatrix();
+        glPushMatrix();
+            glScalef(0.1,1,0.1);
+            glTranslatef(-4.3,-.25,-4.3);
+            glutSolidCube(1);
+        glPopMatrix();
 
-    glPushMatrix();
-    glScalef(0.1,1,0.1);
-    glTranslatef(-4.3,-.25,4.3);
-    glutSolidCube(1);
-    glPopMatrix();
+        glPushMatrix();
+            glScalef(0.1,1,0.1);
+            glTranslatef(4.3,-.25,4.3);
+            glutSolidCube(1);
+        glPopMatrix();
 
+        glPushMatrix();
+            glScalef(0.1,1,0.1);
+            glTranslatef(4.3,-.25,-4.3);
+            glutSolidCube(1);
+        glPopMatrix();
+
+        glPushMatrix();
+            glScalef(0.1,1,0.1);
+            glTranslatef(-4.3,-.25,4.3);
+            glutSolidCube(1);
+        glPopMatrix();
+
+    glPopAttrib();
 
 
 
